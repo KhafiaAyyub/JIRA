@@ -30,8 +30,8 @@ body{
 
 }
 .color{
-    height:1.5rem;
-    width:1.5rem;
+    height:1.3rem;
+    width:2.5rem;
     background-color: aqua;
     border-radius: 2px;
 }
@@ -72,6 +72,37 @@ background-color: black;
     background-color:rgb(80, 80, 92);    
 }
 
-.main-cont{
-    background-color: azure;
+.modal-cont{
+    height: 50vh;
+    width: 45vw;
+    background-color: lightgrey;
+    position: absolute;
+    top: calc((100vh - 50vh)/2);
+    left: calc((100vw - 45vw)/2);
+    display: flex;
+}
+
+.textarea-cont{
+    height: 100%;
+    width: 75%;
+    border: none;
+    outline: none;
+    background-color: rgb(153, 177, 176);
+    resize: none;
+    padding: 2rem;
+    font-size: 1.5rem;
+
+}
+.priority-cont{
+    height:100%;
+    width:25%;
+    background-color: rgb(74, 80, 76);
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+}
+.priority-color{
+height: 3rem;
+width: 55%;
 }
