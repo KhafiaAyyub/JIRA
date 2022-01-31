@@ -1,26 +1,13 @@
 let addBtn = document.querySelector(".add-btn");
-let removeBtn = document.querySelector(".remove-btn");
 let modalCont = document.querySelector(".modal-cont");
+let addFlag = false;
 let mainCont = document.querySelector(".main-cont");
 let textareaCont = document.querySelector(".textarea-cont");
+let colors= ["lightpink","lightblue","lightgreen","black"];
+let modalPriorityColors = colors[colors.length-1]; //black default color
+let allPriorityColors = document.querySelectorAll(".priority-color");
 
-
-let lockClass = "fa-lock";
-let unlockClass = "fa-lock-open";
-
-let ticketsArr = [];
-
-if (localStorage.getItem("jira_tickets")) {
-    // Retrieve and display tickets
-    ticketsArr = JSON.parse(localStorage.getItem("jira_tickets"));
-    ticketsArr.forEach((ticketObj) => {
-        createTicket(ticketObj.ticketColor, ticketObj.ticketTask, ticketObj.ticketID);
-    })
-}
-
-
-
-// Listener for modal priority coloring
+// Listener for modal priority coloring - toggling border color
 allPriorityColors.forEach((colorElem, idx) => {
     colorElem.addEventListener("click", (e) => {
         allPriorityColors.forEach((priorityColorElem, idx) => {
@@ -28,9 +15,9 @@ allPriorityColors.forEach((colorElem, idx) => {
         })
         colorElem.classList.add("border");
 
-        modalPriorityColor = colorElem.classList[0];
+        // modalPriorityColor = colorElem.classList[0];
     })
-})
+}) 
 
 addBtn.addEventListener("click", (e) => {
     // Display Modal
@@ -46,33 +33,50 @@ addBtn.addEventListener("click", (e) => {
         modalCont.style.display = "none";
     }
 })
-removeBtn.addEventListener("click", (e) => {
-    removeFlag = !removeFlag;
-    console.log(removeFlag);
-})
 
-
-modalCont.addEventListener("keydown", (e) => {
+modalCont.addEventListener("keydown",(e) => {
     let key = e.key;
-    if (key === "Shift") {
-        createTicket(modalPriorityColor, textareaCont.value);
-        addFlag = false;
-        setModalToDefault();
+    if(key == "Shift"){
+        createTicket();
+        modalCont.style.display = "none";
+        textareaCont.value = "";
+
     }
 })
 
-function createTicket(ticketColor, ticketTask, ticketID) {
-    let id = ticketID || shortid();
+function createTicket(ticketColor, ticketTask, ticketID){
     let ticketCont = document.createElement("div");
-    ticketCont.setAttribute("class", "ticket-cont");
+    ticketCont.setAttribute("class","ticket-cont");
     ticketCont.innerHTML = `
-        <div class="ticket-color ${ticketColor}"></div>
-        <div class="ticket-id">#${id}</div>
-        <div class="task-area">${ticketTask}</div>
-        <div class="ticket-lock">
-            <i class="fas fa-lock"></i>
-        </div>
-    `;
-    mainCont.appendChild(ticketCont);
+        <div class="ticket-color"></div>
+        <div class="ticket-id">Sample_ID</div>
+        <div class="task-area">Lorem ipsum dolor sit amet consectetur 
+        adipisicing elit. Non harum perferendis doloribus, error optio
+        dolore inventore maxime.</div>`;
+        mainCont.appendChild(ticketCont);
+}
 
- 
+
+
+        // Modify data in localStorage (priority color change)
+        ticketsArr[ticketIdx].ticketColor = newTicketColor;
+        localStorage.setItem("jira_tickets", JSON.stringify(ticketsArr));
+    })
+}
+
+function getTikcetIdx(id) {
+    let ticketIdx = ticketsArr.findIndex((ticketObj) => {
+        return ticketObj.ticketID === id;
+    })
+    return ticketIdx;
+}
+
+function setModalToDefault() {
+    modalCont.style.display = "none";
+    textareaCont.value = "";
+    modalPriorityColor = colors[colors.length - 1];
+    allPriorityColors.forEach((priorityColorElem, idx) => {
+        priorityColorElem.classList.remove("border");
+    })
+    allPriorityColors[allPriorityColors.length - 1].classList.add("border");
+}
