@@ -58,9 +58,5 @@ function createTicket(ticketColor, ticketTask, ticketID){
 
 
 
-        // Modify data in localStorage (priority color change)
-        ticketsArr[ticketIdx].ticketColor = newTicketColor;
-        localStorage.setItem("jira_tickets", JSON.stringify(ticketsArr));
-    })
 }
 
