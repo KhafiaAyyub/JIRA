@@ -64,19 +64,3 @@ function createTicket(ticketColor, ticketTask, ticketID){
     })
 }
 
-function getTikcetIdx(id) {
-    let ticketIdx = ticketsArr.findIndex((ticketObj) => {
-        return ticketObj.ticketID === id;
-    })
-    return ticketIdx;
-}
-
-function setModalToDefault() {
-    modalCont.style.display = "none";
-    textareaCont.value = "";
-    modalPriorityColor = colors[colors.length - 1];
-    allPriorityColors.forEach((priorityColorElem, idx) => {
-        priorityColorElem.classList.remove("border");
-    })
-    allPriorityColors[allPriorityColors.length - 1].classList.add("border");
-}
