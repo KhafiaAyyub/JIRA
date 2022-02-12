@@ -32,6 +32,7 @@ for (let i = 0; i < toolBoxColors.length; i++) {
         let filteredTickets = ticketsArr.filter((ticketObj, idx) => {
             return currentToolBoxColor === ticketObj.ticketColor;
         })
+        
 
         // Remove previous tickets
         let allTicketsCont = document.querySelectorAll(".ticket-cont");
