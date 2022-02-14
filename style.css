@@ -123,11 +123,13 @@ width: 55%;
     background-color: rgb(138, 138, 138);
     padding: 0.4rem; ;
 }
+
 .task-area{
     height: calc(100% - 3rem);
     background-color: rgb(158, 168, 158);
     padding: 0.4rem;
 }
+
 .main-cont{
     display: flex;
     flex-wrap:wrap ;
